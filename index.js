@@ -3,15 +3,17 @@ const app = express();
 const port = 3000;
 const { Client } = require("pg");
 
+require("dotenv").config();
+
 app.use(express.json());
 
 // CRUD - CREATE READ UPDATE DELETE
 const db = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "superfit",
-  password: "123",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
 });
 
 db.connect();
@@ -49,4 +51,5 @@ app.post("/pessoas", async (req, res) => {
 
 app.listen(port, () => {
   console.log("server run", port);
+  // console.log("ENV DATA", process.env.DB_NAME);
 });
