@@ -1,12 +1,13 @@
+import express from "express";
+import dotenv from "dotenv";
 import { ModalidadeService } from "./services/modalidade.service";
 import { PessoaService } from "./services/pessoa.service";
+import { Client } from "pg";
 
-const express = require("express");
 const app = express();
 const port = 3000;
-const { Client } = require("pg");
 
-require("dotenv").config();
+dotenv.config();
 
 app.use(express.json());
 // CRUD - CREATE READ UPDATE DELETE
@@ -15,7 +16,7 @@ const db = new Client({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
+  port: 5432,
 });
 
 db.connect();
